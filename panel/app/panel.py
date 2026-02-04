@@ -5,7 +5,13 @@ from pathlib import Path
 import tkinter as tk
 from tkinter import ttk
 
-from actions import ensure_logger, get_git_version, log_click, log_start
+from actions import (
+    ensure_logger,
+    get_git_version,
+    handle_d_action,
+    log_click,
+    log_start,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -48,10 +54,16 @@ def build_ui(root: tk.Tk, config: dict, logger) -> None:
     for index, label in enumerate(buttons):
         row = index // 5
         column = index % 5
+        action = None
+        if label == "D":
+            action = lambda: handle_d_action(REPO_ROOT, logger)
         button = ttk.Button(
             buttons_frame,
             text=label,
-            command=lambda value=label: log_click(logger, value),
+            command=lambda value=label, handler=action: (
+                log_click(logger, value),
+                handler() if handler else None,
+            ),
             width=4,
         )
         button.grid(row=row, column=column, padx=4, pady=4)
