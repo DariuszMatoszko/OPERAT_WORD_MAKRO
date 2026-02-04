@@ -1,6 +1,6 @@
 # Krytyczne uwagi
 
-1) Branding: zawsze “GEOINVEST” (CAPS) w UI i tekstach.
+1) Branding: zawsze GEOINWEST
 2) Jedno zadanie na raz.
 3) CLEAN REBUILD dla panelu z ochroną logs/ i plików stanu.
 4) Ścieżki względne, praca na G:\ (bez C:\).
