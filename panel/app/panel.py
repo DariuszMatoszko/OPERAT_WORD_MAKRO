@@ -25,7 +25,7 @@ def load_config() -> dict:
 
 
 def build_ui(root: tk.Tk, config: dict, logger) -> None:
-    root.title(config.get("title", "GEOinvest"))
+    root.title(config.get("title", "GEOINVEST"))
     root.geometry(config.get("size", "320x220"))
     root.resizable(False, False)
     root.attributes("-topmost", True)
@@ -40,7 +40,7 @@ def build_ui(root: tk.Tk, config: dict, logger) -> None:
 
     header = ttk.Label(
         header_frame,
-        text=config.get("header", "GEOinvest"),
+        text=config.get("header", "GEOINVEST"),
         font=("Segoe UI", 14, "bold"),
     )
     header.pack()
