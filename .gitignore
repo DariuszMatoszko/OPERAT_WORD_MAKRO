@@ -1,2 +1,12 @@
 __pycache__/
 *.pyc
+
+# lokalne logi
+logs/panel.log
+
+# robocze dane (nie commitujemy codziennie)
+work/DANE_CURRENT.docm
+
+# wygenerowane wyjścia
+dist/
+~$*.docm
