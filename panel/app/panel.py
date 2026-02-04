@@ -25,30 +25,35 @@ def load_config() -> dict:
 
 
 def build_ui(root: tk.Tk, config: dict, logger) -> None:
-    root.title(config.get("title", "Panel"))
+    root.title(config.get("title", "GEOinvest"))
     root.geometry(config.get("size", "320x220"))
     root.resizable(False, False)
     root.attributes("-topmost", True)
 
-    container = ttk.Frame(root, padding=10)
+    outer_padding = 8
+    button_pad = 4
+    container = ttk.Frame(root, padding=outer_padding)
     container.pack(fill=tk.BOTH, expand=True)
 
+    header_frame = ttk.Frame(container)
+    header_frame.pack()
+
     header = ttk.Label(
-        container,
-        text=config.get("header", ""),
+        header_frame,
+        text=config.get("header", "GEOinvest"),
         font=("Segoe UI", 14, "bold"),
     )
     header.pack()
 
     subheader = ttk.Label(
-        container,
-        text=config.get("subheader", ""),
+        header_frame,
+        text=config.get("subheader", "OPERAT_WORD_MAKRO"),
         font=("Segoe UI", 9),
     )
-    subheader.pack(pady=(0, 8))
+    subheader.pack(pady=(0, button_pad))
 
     buttons_frame = ttk.Frame(container)
-    buttons_frame.pack(expand=True)
+    buttons_frame.pack()
 
     buttons = config.get("buttons", [])
     for index, label in enumerate(buttons):
@@ -66,7 +71,17 @@ def build_ui(root: tk.Tk, config: dict, logger) -> None:
             ),
             width=4,
         )
-        button.grid(row=row, column=column, padx=4, pady=4)
+        button.grid(row=row, column=column, padx=button_pad, pady=button_pad)
+
+    root.update_idletasks()
+    buttons_width = buttons_frame.winfo_reqwidth()
+    header_frame.configure(width=buttons_width)
+    header_frame.pack_propagate(False)
+    root.update_idletasks()
+    window_width = root.winfo_reqwidth()
+    window_height = root.winfo_reqheight()
+    root.minsize(window_width, window_height)
+    root.geometry(f"{window_width}x{window_height}")
 
 
 def main() -> None:
